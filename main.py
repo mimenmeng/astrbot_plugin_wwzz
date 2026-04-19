@@ -31,9 +31,9 @@ class MyPlugin(Star):
     
     @filter.event_message_type(filter.EventMessageType.ALL)
     async def on_all_message(self, event: AstrMessageEvent):
-        user_name = event.get_sender_name()
         group_id = event.get_group_id()
-        yield event.plain_result("收到了一条消息。"+user_name+group_id)
+        user_id=event.get_sender_id()
+        yield event.plain_result("收到了一条消息。"+group_id+user_id)
 
 
 
