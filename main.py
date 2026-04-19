@@ -19,7 +19,6 @@ class MyPlugin(Star):
         self.user_lottery_record.touch(exist_ok=True)
 
     def read_lottery_record(self) -> dict:
-        ""
         with open(self.user_lottery_record, "r", encoding="utf-8") as f:
                 return json.load(f)
         
@@ -32,7 +31,9 @@ class MyPlugin(Star):
     
     @filter.event_message_type(filter.EventMessageType.ALL)
     async def on_all_message(self, event: AstrMessageEvent):
-        yield event.plain_result("收到了一条消息。")
+        user_name = event.get_sender_name()
+        group_id = event.get_group_id()
+        yield event.plain_result("收到了一条消息。"+user_name+group_id)
 
 
 
